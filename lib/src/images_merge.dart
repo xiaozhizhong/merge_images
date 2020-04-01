@@ -15,7 +15,7 @@ part "merge_painter.dart";
 // ignore: must_be_immutable
 class ImagesMerge extends StatelessWidget {
   ImagesMerge(this.imageList,
-      {this.direction = Axis.vertical, this.controller});
+      {this.direction = Axis.vertical, this.controller, this.fit = true,this.backgroundColor});
 
   ///List of images list, content must be ui.Image.
   ///If you have another format of image, you can transfer it to ui.Image by [ImagesMergeHelper].
@@ -23,6 +23,14 @@ class ImagesMerge extends StatelessWidget {
 
   ///Merge direction, default to vertical.
   final Axis direction;
+
+  ///Whether to Scale the pictures to same width/height when pictures has different width/height,
+  ///Fit width when direction is vertical, and fit height when horizontal.
+  ///Default to true.
+  final bool fit;
+
+  ///background color
+  final Color backgroundColor;
 
   ///Controller to capture screen.
   final CaptureController controller;
@@ -37,8 +45,9 @@ class ImagesMerge extends StatelessWidget {
     return RepaintBoundary(
       key: controller.key ?? ValueKey(0),
       child: Container(
+        color: backgroundColor,
         child: CustomPaint(
-          painter: _MergePainter(imageList, direction),
+          painter: _MergePainter(imageList, direction, fit),
           size: Size(totalWidth.toDouble(), totalHeight.toDouble()),
         ),
       ),
