@@ -6,11 +6,12 @@ part of "images_merge.dart";
 ///@description painter
 ///
 class _MergePainter extends CustomPainter {
-  _MergePainter(this.imageList, this.direction, this.fit);
+  _MergePainter(this.imageList, this.direction, this.fit,this.scale);
 
   final List<ui.Image> imageList;
   final Axis direction;
   final bool fit;
+  final double scale;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -21,27 +22,48 @@ class _MergePainter extends CustomPainter {
     Paint paint = Paint();
     imageList.forEach((image) {
       //scale the image to same width/height
-      if (fit) {
-        canvas.save();
-        double scaleDx = dx;
-        double scaleDy = dy;
-        if (direction == Axis.vertical && image.width != totalWidth) {
-          canvas.scale(totalWidth / image.width);
-          scaleDy *= image.width / totalWidth;
-        } else if (direction == Axis.horizontal &&
-            image.height != totalHeight) {
-          canvas.scale(totalHeight / image.height);
-          scaleDx *= image.height / totalHeight;
+      double imageHeight;
+      double imageWidth;
+      double dxScale = dx;
+      double dyScale = dy;
+      if(direction == Axis.vertical){
+        if(image.width < totalWidth && !fit){
+          canvas.drawImage(image, Offset(dx, dy), paint);
+        }else{
+          canvas.save();
+          if(!fit){
+            imageHeight = image.height * scale;
+            canvas.scale(imageHeight/image.height);
+          }else{
+            canvas.scale(totalWidth/image.width);
+            imageHeight = image.height * totalWidth/image.width;
+          }
+
+          dyScale *= image.height/imageHeight;
+          canvas.drawImage(image, Offset(dxScale,dyScale), paint);
+          canvas.restore();
         }
-        canvas.drawImage(image, Offset(scaleDx, scaleDy), paint);
-        canvas.restore();
-      } else {
-        canvas.drawImage(image, Offset(dx, dy), paint);
+      }else{
+        if(image.height < totalHeight && !fit){
+          canvas.drawImage(image, Offset(dx, dy), paint);
+        }else{
+          canvas.save();
+          if(!fit){
+            imageWidth = image.width * scale;
+            canvas.scale(imageWidth/image.width);
+          }else{
+            canvas.scale(totalHeight/image.height);
+            imageWidth = image.width * totalHeight/image.height;
+          }
+          dxScale *= image.width/imageWidth;
+          canvas.drawImage(image, Offset(dxScale,dyScale), paint);
+          canvas.restore();
+        }
       }
       if (direction == Axis.vertical) {
-        dy += image.height;
+        dy += imageHeight;
       } else {
-        dx += image.width;
+        dx += imageWidth;
       }
     });
   }
