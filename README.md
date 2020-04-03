@@ -1,11 +1,15 @@
 # merge_images in flutter
+
 <a href="https://pub.dev/packages/pull_to_refresh">
   <img src="https://img.shields.io/pub/v/pull_to_refresh.svg"/>
 </a>
+
 [中文文档](README(CH).MD)
+
 ## Intro 
 Merge images (Image stitching) in vertical or horizontal direction.
 ![Preview](example/preview/preview1.png)
+
 ## Features
 * Support vertical and horizontal direction.
 * Provide a helper to merge images in code and get a result image, and a widget to automatically merge and show images.

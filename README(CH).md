@@ -1,10 +1,13 @@
 # merge_images in flutter
+
 <a href="https://pub.dev/packages/pull_to_refresh">
   <img src="https://img.shields.io/pub/v/pull_to_refresh.svg"/>
 </a>
+
 ## 简介 
 合并图片（垂直或水平方向）
 ![Preview](example/preview/preview1.png)
+
 ## 特性
 * 支持水平和垂直方向
 * 提供helper可在代码中合并多张图片并得到合并后的图片，也提供widget直接合并并显示图片。
