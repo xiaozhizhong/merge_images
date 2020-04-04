@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:example/image_preview_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
@@ -110,7 +111,7 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
    backgroundColor: Colors.black26);
    Uint8List bytes = await ImagesMergeHelper.imageToUint8List(image);
    Navigator.push(context, MaterialPageRoute(
-        builder: (context)=>_Preview(bytes)
+        builder: (context)=>Preview(bytes)
     ));
   }
 
@@ -118,21 +119,5 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
 }
 
 
-class _Preview extends StatelessWidget {
 
-  _Preview(this.image);
-
-  final Uint8List image;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("preview"),),
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(vertical: 50,horizontal: 30),
-        child: Image.memory(image),
-      ),
-    );
-  }
-}
 

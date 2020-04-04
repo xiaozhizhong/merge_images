@@ -119,9 +119,9 @@ class ImagesMerge extends StatelessWidget {
 
 /// Screen shot capture controller
 class CaptureController {
-  CaptureController({@required this.key});
+  CaptureController();
 
-  final GlobalKey key;
+  final GlobalKey key = GlobalKey();
 
   ///capture the screen shot by RepaintBoundary
   Future<Uint8List> capture() async {

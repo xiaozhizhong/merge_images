@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:example/image_preview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:merge_images/merge_images.dart';
 import 'dart:ui' as ui;
@@ -20,6 +23,8 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
 
   final networkImagePath =
       "http://img.article.pchome.net/00/29/20/31/pic_lib/s960x639/Sakura_28s960x639.jpg";
+
+  final captureController = CaptureController();
 
   @override
   void initState() {
@@ -134,13 +139,29 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
                     direction: Axis.horizontal,
                     fit: false,
                     backgroundColor: Colors.black26,
+                    controller: captureController,
                   ),
                 ),
-              )
+              ),
+              RaisedButton(
+                  onPressed:()=> getCapture(context),
+                  child: Text("Capture",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .title,))
             ],
           ),
         ),
       ),
     );
+  }
+
+  ///get capture of widget by RepaintBoundary
+  getCapture(context) async{
+  Uint8List bytes = await captureController.capture();
+  Navigator.push(context, MaterialPageRoute(
+      builder: (context)=>Preview(bytes)
+  ));
   }
 }
