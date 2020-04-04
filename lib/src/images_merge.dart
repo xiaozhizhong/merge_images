@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
@@ -49,23 +48,18 @@ class ImagesMerge extends StatelessWidget {
         _calculate(constraint);
         return RepaintBoundary(
           key: controller?.key ?? ValueKey(0),
-          child:
-              ClipRRect(
-                child: Container(
-                  color: backgroundColor,
-                  child: CustomPaint(
-                    painter: _MergePainter(imageList, direction, fit,scale),
-                    size: Size(totalWidth.toDouble(), totalHeight.toDouble()),
-                  ),
-                ),
-              )
-          ,);
+          child: ClipRRect(
+            child: Container(
+              color: backgroundColor,
+              child: CustomPaint(
+                painter: _MergePainter(imageList, direction, fit, scale),
+                size: Size(totalWidth.toDouble(), totalHeight.toDouble()),
+              ),
+            ),
+          ),
+        );
       },
     );
-  }
-
-  _scale(){
-
   }
 
   ///calculating width and height of canvas
@@ -84,13 +78,11 @@ class ImagesMerge extends StatelessWidget {
         totalWidth > constraint.maxWidth) {
       scale = constraint.maxWidth / totalWidth;
       totalWidth = constraint.maxWidth.floor();
-
     } else if (direction == Axis.horizontal &&
         constraint.hasBoundedHeight &&
         totalHeight > constraint.maxHeight) {
       scale = constraint.maxHeight / totalHeight;
       totalHeight = constraint.maxHeight.floor();
-
     }
     //calculate the opposite
     imageList.forEach((image) {

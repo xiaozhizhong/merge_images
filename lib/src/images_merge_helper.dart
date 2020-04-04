@@ -46,7 +46,8 @@ class ImagesMergeHelper {
     double dx = 0;
     double dy = 0;
     //set background color
-    if (backgroundColor != null)canvas.drawColor(backgroundColor, BlendMode.srcOver);
+    if (backgroundColor != null)
+      canvas.drawColor(backgroundColor, BlendMode.srcOver);
     //draw images into canvas
     imageList.forEach((image) {
       //scale the image to same width/height
@@ -101,7 +102,7 @@ class ImagesMergeHelper {
   ///transfer Unit8List to ui.Image
   ///[bytes] Uint8List bytes
   static Future<ui.Image> uint8ListToImage(Uint8List bytes) async {
-    ImageProvider provider =  MemoryImage(bytes);
+    ImageProvider provider = MemoryImage(bytes);
     return await loadImageFromProvider(provider);
   }
 

@@ -27,14 +27,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,35 +39,32 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             RaisedButton(
                 onPressed: _toWidget,
-                child: Text("ImagesMerge Widget",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .title,)),
-            SizedBox(height: 30,),
+                child: Text(
+                  "ImagesMerge Widget",
+                  style: Theme.of(context).textTheme.title,
+                )),
+            SizedBox(
+              height: 30,
+            ),
             RaisedButton(
                 onPressed: _toHelper,
-                child: Text("ImagesMerge Helper",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .title,)),
+                child: Text(
+                  "ImagesMerge Helper",
+                  style: Theme.of(context).textTheme.title,
+                )),
           ],
         ),
       ),
     );
   }
 
-  _toWidget(){
-    Navigator.push(context, MaterialPageRoute(
-      builder: (context)=>ImagesMergeWidgetPage()
-    ));
+  _toWidget() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ImagesMergeWidgetPage()));
   }
 
-  _toHelper(){
-    Navigator.push(context, MaterialPageRoute(
-        builder: (context)=>ImagesMergeHelperPage()
-    ));
+  _toHelper() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ImagesMergeHelperPage()));
   }
-
 }

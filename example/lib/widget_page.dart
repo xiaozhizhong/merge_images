@@ -61,35 +61,40 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Image.asset(
-                  "assets/sunset.jpeg",
-                  scale: 10,
-                  fit: BoxFit.scaleDown,
-                ),
-              SizedBox(height: 10,),
+                "assets/sunset.jpeg",
+                scale: 10,
+                fit: BoxFit.scaleDown,
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Image.asset(
                 "assets/bridge.jpg",
                 scale: 10,
                 fit: BoxFit.scaleDown,
               ),
-              SizedBox(height: 10,),
-              Image.network(networkImagePath,scale: 10,
-                fit: BoxFit.scaleDown,),
+              SizedBox(
+                height: 10,
+              ),
+              Image.network(
+                networkImagePath,
+                scale: 10,
+                fit: BoxFit.scaleDown,
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Text("merge(vertical&fit)"),
               ),
               Offstage(
                 offstage: imageList.isEmpty,
-                child:
-                Container(
+                child: Container(
                   width: 100,
                   child: ImagesMerge(
                     imageList,
                     direction: Axis.vertical,
                     fit: true,
                   ),
-                )
-                ,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -97,8 +102,7 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
               ),
               Offstage(
                 offstage: imageList.isEmpty,
-                child:
-                Container(
+                child: Container(
                   width: 100,
                   child: ImagesMerge(
                     imageList,
@@ -106,8 +110,7 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
                     backgroundColor: Colors.black26,
                     fit: false,
                   ),
-                )
-                ,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -115,11 +118,10 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
               ),
               Offstage(
                 offstage: imageList.isEmpty,
-                child:
-                Container(
-                  height:70,
+                child: Container(
+                  height: 70,
                   child: ImagesMerge(
-                      imageList,
+                    imageList,
                     direction: Axis.horizontal,
                     fit: true,
                   ),
@@ -131,9 +133,8 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
               ),
               Offstage(
                 offstage: imageList.isEmpty,
-                child:
-                Container(
-                  height:70,
+                child: Container(
+                  height: 70,
                   child: ImagesMerge(
                     imageList,
                     direction: Axis.horizontal,
@@ -144,12 +145,11 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
                 ),
               ),
               RaisedButton(
-                  onPressed:()=> getCapture(context),
-                  child: Text("Capture",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .title,))
+                  onPressed: () => getCapture(context),
+                  child: Text(
+                    "Capture",
+                    style: Theme.of(context).textTheme.title,
+                  ))
             ],
           ),
         ),
@@ -158,10 +158,9 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
   }
 
   ///get capture of widget by RepaintBoundary
-  getCapture(context) async{
-  Uint8List bytes = await captureController.capture();
-  Navigator.push(context, MaterialPageRoute(
-      builder: (context)=>Preview(bytes)
-  ));
+  getCapture(context) async {
+    Uint8List bytes = await captureController.capture();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Preview(bytes)));
   }
 }

@@ -1,7 +1,10 @@
 # merge_images in flutter
 
+<a href="https://https://pub.dev/packages/merge_images"><img src="https://img.shields.io/pub/v/merge_images.svg"/></a>  </a><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"/></a>
+
 ## 简介 
 合并图片（垂直或水平方向）
+
 ![Preview](example/preview/preview1.png)
 
 ## 特性

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 import 'package:merge_images/merge_images.dart';
+
 ///
 ///@author xiaozhizhong
 ///@date 2020/4/2
@@ -16,7 +17,6 @@ class ImagesMergeHelperPage extends StatefulWidget {
 }
 
 class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
-
   ui.Image assetImage1;
   ui.Image assetImage2;
   ui.Image providerImage;
@@ -32,9 +32,9 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
 
   loadImage() async {
     assetImage1 =
-    await ImagesMergeHelper.loadImageFromAsset("assets/sunset.jpeg");
+        await ImagesMergeHelper.loadImageFromAsset("assets/sunset.jpeg");
     assetImage2 =
-    await ImagesMergeHelper.loadImageFromAsset("assets/bridge.jpg");
+        await ImagesMergeHelper.loadImageFromAsset("assets/bridge.jpg");
     providerImage = await ImagesMergeHelper.loadImageFromProvider(
         NetworkImage(networkImagePath));
   }
@@ -58,66 +58,65 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
                 scale: 10,
                 fit: BoxFit.scaleDown,
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Image.asset(
                 "assets/bridge.jpg",
                 scale: 10,
                 fit: BoxFit.scaleDown,
               ),
-              SizedBox(height: 10,),
-              Image.network(networkImagePath,scale: 10,
-                fit: BoxFit.scaleDown,),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 10,
+              ),
+              Image.network(
+                networkImagePath,
+                scale: 10,
+                fit: BoxFit.scaleDown,
+              ),
+              SizedBox(
+                height: 30,
+              ),
               RaisedButton(
-                  onPressed: ()=>_merge(fit: true,direction: Axis.vertical),
-                  child: Text("vertical & fit",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .title,)),
+                  onPressed: () => _merge(fit: true, direction: Axis.vertical),
+                  child: Text(
+                    "vertical & fit",
+                    style: Theme.of(context).textTheme.title,
+                  )),
               RaisedButton(
-                  onPressed: ()=>_merge(fit: false,direction: Axis.vertical),
-                  child: Text("vertical",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .title,)),
+                  onPressed: () => _merge(fit: false, direction: Axis.vertical),
+                  child: Text(
+                    "vertical",
+                    style: Theme.of(context).textTheme.title,
+                  )),
               RaisedButton(
-                  onPressed: ()=>_merge(fit: true,direction: Axis.horizontal),
-                  child: Text("horizontal & fit",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .title,)),
+                  onPressed: () =>
+                      _merge(fit: true, direction: Axis.horizontal),
+                  child: Text(
+                    "horizontal & fit",
+                    style: Theme.of(context).textTheme.title,
+                  )),
               RaisedButton(
-                  onPressed: ()=>_merge(fit: false,direction: Axis.horizontal),
-                  child: Text("horizontal",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .title,)),
+                  onPressed: () =>
+                      _merge(fit: false, direction: Axis.horizontal),
+                  child: Text(
+                    "horizontal",
+                    style: Theme.of(context).textTheme.title,
+                  )),
             ],
           ),
         ),
       ),
     );
   }
+
   ///merge images using ImagesMergeHelper and preview
-  _merge({bool fit,Axis direction}) async{
-   ui.Image image = await ImagesMergeHelper.margeImages(
-       [assetImage1,assetImage2,providerImage],
-   fit: fit,
-       direction: direction,
-   backgroundColor: Colors.black26);
-   Uint8List bytes = await ImagesMergeHelper.imageToUint8List(image);
-   Navigator.push(context, MaterialPageRoute(
-        builder: (context)=>Preview(bytes)
-    ));
+  _merge({bool fit, Axis direction}) async {
+    ui.Image image = await ImagesMergeHelper.margeImages(
+        [assetImage1, assetImage2, providerImage],
+        fit: fit, direction: direction, backgroundColor: Colors.black26);
+    Uint8List bytes = await ImagesMergeHelper.imageToUint8List(image);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Preview(bytes)));
   }
-
-
 }
-
-
-
-

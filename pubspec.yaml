@@ -1,6 +1,6 @@
 name: merge_images
 description: A package that can merge images into one, support vertical and horizontal direction.
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/xiaozhizhong/merge_images
 
 environment:
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  path_provider: ^1.6.5
+  path_provider: ^1.4.0
 
 dev_dependencies:
   flutter_test:

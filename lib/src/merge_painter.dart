@@ -6,7 +6,7 @@ part of "images_merge.dart";
 ///@description painter
 ///
 class _MergePainter extends CustomPainter {
-  _MergePainter(this.imageList, this.direction, this.fit,this.scale);
+  _MergePainter(this.imageList, this.direction, this.fit, this.scale);
 
   final List<ui.Image> imageList;
   final Axis direction;
@@ -26,37 +26,37 @@ class _MergePainter extends CustomPainter {
       double imageWidth;
       double dxScale = dx;
       double dyScale = dy;
-      if(direction == Axis.vertical){
-        if(image.width < totalWidth && !fit){
+      if (direction == Axis.vertical) {
+        if (image.width < totalWidth && !fit) {
           canvas.drawImage(image, Offset(dx, dy), paint);
-        }else{
+        } else {
           canvas.save();
-          if(!fit){
+          if (!fit) {
             imageHeight = image.height * scale;
-            canvas.scale(imageHeight/image.height);
-          }else{
-            canvas.scale(totalWidth/image.width);
-            imageHeight = image.height * totalWidth/image.width;
+            canvas.scale(imageHeight / image.height);
+          } else {
+            canvas.scale(totalWidth / image.width);
+            imageHeight = image.height * totalWidth / image.width;
           }
 
-          dyScale *= image.height/imageHeight;
-          canvas.drawImage(image, Offset(dxScale,dyScale), paint);
+          dyScale *= image.height / imageHeight;
+          canvas.drawImage(image, Offset(dxScale, dyScale), paint);
           canvas.restore();
         }
-      }else{
-        if(image.height < totalHeight && !fit){
+      } else {
+        if (image.height < totalHeight && !fit) {
           canvas.drawImage(image, Offset(dx, dy), paint);
-        }else{
+        } else {
           canvas.save();
-          if(!fit){
+          if (!fit) {
             imageWidth = image.width * scale;
-            canvas.scale(imageWidth/image.width);
-          }else{
-            canvas.scale(totalHeight/image.height);
-            imageWidth = image.width * totalHeight/image.height;
+            canvas.scale(imageWidth / image.width);
+          } else {
+            canvas.scale(totalHeight / image.height);
+            imageWidth = image.width * totalHeight / image.height;
           }
-          dxScale *= image.width/imageWidth;
-          canvas.drawImage(image, Offset(dxScale,dyScale), paint);
+          dxScale *= image.width / imageWidth;
+          canvas.drawImage(image, Offset(dxScale, dyScale), paint);
           canvas.restore();
         }
       }
