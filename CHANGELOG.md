@@ -5,3 +5,7 @@
 ## [1.0.0]
 
 * resolve dependency, format code
+
+## [1.0.1]
+
+* remove unused files

@@ -1,6 +1,6 @@
 name: merge_images
 description: A package that can merge images into one, support vertical and horizontal direction.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/xiaozhizhong/merge_images
 
 environment:
