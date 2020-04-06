@@ -26,23 +26,19 @@ class ImagesMergeHelper {
       {Axis direction = Axis.vertical,
       bool fit = true,
       Color backgroundColor}) {
-    int totalWidth = 0;
-    int totalHeight = 0;
-    //calculate width and height of canvas
+    int maxWidth = 0;
+    int maxHeight = 0;
+    //calculate max width/height of image
     imageList.forEach((image) {
       if (direction == Axis.vertical) {
-        if (totalWidth < image.width) totalWidth = image.width;
-        totalHeight += image.height;
+        if (maxWidth < image.width) maxWidth = image.width;
       } else {
-        if (totalHeight < image.height) totalHeight = image.height;
-        totalWidth += image.width;
+        if (maxHeight < image.height) maxHeight = image.height;
       }
     });
-    Rect rect =
-        Rect.fromLTWH(0, 0, totalWidth.toDouble(), totalHeight.toDouble());
     ui.PictureRecorder recorder = ui.PictureRecorder();
     final paint = Paint();
-    Canvas canvas = Canvas(recorder, rect);
+    Canvas canvas = Canvas(recorder);
     double dx = 0;
     double dy = 0;
     //set background color
@@ -50,32 +46,33 @@ class ImagesMergeHelper {
       canvas.drawColor(backgroundColor, BlendMode.srcOver);
     //draw images into canvas
     imageList.forEach((image) {
-      //scale the image to same width/height
+      double scaleDx = dx;
+      double scaleDy = dy;
       if (fit) {
+        //scale the image to same width/height
         canvas.save();
-        double scaleDx = dx;
-        double scaleDy = dy;
-        if (direction == Axis.vertical && image.width != totalWidth) {
-          canvas.scale(totalWidth / image.width);
-          scaleDy *= image.width / totalWidth;
-        } else if (direction == Axis.horizontal &&
-            image.height != totalHeight) {
-          canvas.scale(totalHeight / image.height);
-          scaleDx *= image.height / totalHeight;
+        if (direction == Axis.vertical && image.width != maxWidth) {
+          canvas.scale(maxWidth / image.width);
+          scaleDy *= image.width / maxWidth;
+        } else if (direction == Axis.horizontal && image.height != maxHeight) {
+          canvas.scale(maxHeight / image.height);
+          scaleDx *= image.height / maxHeight;
         }
         canvas.drawImage(image, Offset(scaleDx, scaleDy), paint);
         canvas.restore();
       } else {
+        //draw directly
         canvas.drawImage(image, Offset(dx, dy), paint);
       }
-
+      //accumulate dx/dy
       if (direction == Axis.vertical) {
-        dy += image.height;
+        dy += scaleDy;
       } else {
-        dx += image.width;
+        dx += scaleDx;
       }
     });
-    return recorder.endRecording().toImage(totalWidth, totalHeight);
+    //output image
+    return recorder.endRecording().toImage(dx.floor(), dy.floor());
   }
 
   ///transfer ui.Image to Unit8List
