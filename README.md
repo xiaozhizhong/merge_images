@@ -58,6 +58,6 @@ Besides, the widget was wrapped with RepaintBoundary, you can simply passing an 
   Uint8List bytes = await captureController.capture();
   }
 ```
-##LICENSE
+## LICENSE
 MIT License
 

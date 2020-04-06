@@ -57,5 +57,5 @@ ImagesMerge(
   Uint8List bytes = await captureController.capture();
   }
 ```
-##LICENSE
+## LICENSE
 MIT License
