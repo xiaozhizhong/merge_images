@@ -43,7 +43,7 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Widget Page"),
+        title: Text("Helper Page"),
       ),
       body: Container(
         width: double.infinity,

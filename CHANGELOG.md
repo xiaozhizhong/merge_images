@@ -13,3 +13,7 @@
 ## [1.0.2]
 
 * update ImagesMergeHelper
+
+## [1.0.3]
+
+* fix bugs of ImagesMergeHelper
