@@ -1,6 +1,7 @@
-import 'package:example/helper_page.dart';
-import 'package:example/widget_page.dart';
 import 'package:flutter/material.dart';
+
+import 'helper_page.dart';
+import 'widget_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,9 +19,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -31,26 +32,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
                 onPressed: _toWidget,
                 child: Text(
                   "ImagesMerge Widget",
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                 )),
             SizedBox(
               height: 30,
             ),
-            RaisedButton(
+            ElevatedButton(
                 onPressed: _toHelper,
                 child: Text(
                   "ImagesMerge Helper",
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                 )),
           ],
         ),

@@ -18,14 +18,15 @@ class ImagesMergeHelper {
   ///Merge images from a list of ui.Image
   ///[imageList] list of ui.Image
   ///[direction] merge direction, default to vertical
-  ///[fit] Whether to Scale the pictures to same width/height when pictures has different width/height,
+  ///[fit] Whether to Scale the pictures to same width/height when pictures has
+  ///different width/height,
   /// Fit width when direction is vertical, and fit height when horizontal.
   /// Default to true.
   ///[backgroundColor] background color of picture
   static Future<ui.Image> margeImages(List<ui.Image> imageList,
       {Axis direction = Axis.vertical,
       bool fit = true,
-      Color backgroundColor}) {
+      Color? backgroundColor}) {
     int maxWidth = 0;
     int maxHeight = 0;
     //calculate max width/height of image
@@ -57,12 +58,12 @@ class ImagesMergeHelper {
         canvas.save();
         if (direction == Axis.vertical && image.width != maxWidth) {
           canvas.scale(maxWidth / image.width);
-          scaleDy *= imageWidth/maxWidth;
-          imageHeight *= maxWidth/imageWidth;
+          scaleDy *= imageWidth / maxWidth;
+          imageHeight *= maxWidth / imageWidth;
         } else if (direction == Axis.horizontal && image.height != maxHeight) {
           canvas.scale(maxHeight / image.height);
-          scaleDx *= imageHeight/maxHeight;
-          imageWidth *= maxHeight/imageHeight;
+          scaleDx *= imageHeight / maxHeight;
+          imageWidth *= maxHeight / imageHeight;
         }
         canvas.drawImage(image, Offset(scaleDx, scaleDy), paint);
         canvas.restore();
@@ -88,14 +89,16 @@ class ImagesMergeHelper {
   ///[format] default to png
   static Future<Uint8List> imageToUint8List(ui.Image image,
       {ui.ImageByteFormat format = ui.ImageByteFormat.png}) async {
-    ByteData byteData = await image.toByteData(format: format);
+    ByteData byteData =
+        await (image.toByteData(format: format) as FutureOr<ByteData>);
     return byteData.buffer.asUint8List();
   }
 
   ///transfer ui.Image to File
   ///[image]
-  ///[path] path to store temporary file, will use [ getTemporaryDirectory ] by path_provider if null
-  static Future<File> imageToFile(ui.Image image, {String path}) async {
+  ///[path] path to store temporary file, will use [ getTemporaryDirectory ]
+  ///by path_provider if null
+  static Future<File> imageToFile(ui.Image image, {String? path}) async {
     Uint8List byte = await imageToUint8List(image);
     final directory = path ?? (await getTemporaryDirectory()).path;
     String fileName = DateTime.now().toIso8601String();
@@ -134,7 +137,7 @@ class ImagesMergeHelper {
     ImageConfiguration config = ImageConfiguration.empty,
   }) async {
     Completer<ui.Image> completer = Completer<ui.Image>();
-    ImageStreamListener listener;
+    late ImageStreamListener listener;
     ImageStream stream = provider.resolve(config);
     listener = ImageStreamListener((ImageInfo frame, bool sync) {
       final ui.Image image = frame.image;
