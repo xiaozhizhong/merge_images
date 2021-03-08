@@ -19,22 +19,24 @@ class ImagesMerge extends StatelessWidget {
       this.backgroundColor});
 
   ///List of images list, content must be ui.Image.
-  ///If you have another format of image, you can transfer it to ui.Image by [ImagesMergeHelper].
+  ///If you have another format of image, you can transfer it to ui.Image
+  ///by [ImagesMergeHelper].
   final List<ui.Image> imageList;
 
   ///Merge direction, default to vertical.
   final Axis direction;
 
-  ///Whether to Scale the pictures to same width/height when pictures has different width/height,
+  ///Whether to Scale the pictures to same width/height when pictures has
+  ///different width/height,
   ///Fit width when direction is vertical, and fit height when horizontal.
   ///Default to true.
   final bool fit;
 
   ///background color
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   ///Controller to capture screen.
-  final CaptureController controller;
+  final CaptureController? controller;
 
   int totalWidth = 0;
   int totalHeight = 0;
@@ -116,14 +118,15 @@ class CaptureController {
   final GlobalKey key = GlobalKey();
 
   ///capture the screen shot by RepaintBoundary
-  Future<Uint8List> capture() async {
+  Future<Uint8List?> capture() async {
     try {
-      RenderRepaintBoundary boundary = key.currentContext.findRenderObject();
+      RenderRepaintBoundary boundary =
+          key.currentContext!.findRenderObject() as RenderRepaintBoundary;
       double dpr = ui.window.devicePixelRatio;
       ui.Image image = await boundary.toImage(pixelRatio: dpr);
 
-      ByteData byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
+      ByteData byteData = await (image.toByteData(
+          format: ui.ImageByteFormat.png) as Future<ByteData>);
       Uint8List pngBytes = byteData.buffer.asUint8List();
       return pngBytes;
     } catch (e) {

@@ -1,10 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:example/image_preview_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 import 'package:merge_images/merge_images.dart';
+
+import 'image_preview_page.dart';
 
 ///
 ///@author xiaozhizhong
@@ -17,9 +18,9 @@ class ImagesMergeHelperPage extends StatefulWidget {
 }
 
 class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
-  ui.Image assetImage1;
-  ui.Image assetImage2;
-  ui.Image providerImage;
+  ui.Image? assetImage1;
+  ui.Image? assetImage2;
+  ui.Image? providerImage;
 
   final networkImagePath =
       "http://img.article.pchome.net/00/29/20/31/pic_lib/s960x639/Sakura_28s960x639.jpg";
@@ -77,31 +78,31 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
               SizedBox(
                 height: 30,
               ),
-              RaisedButton(
+              ElevatedButton(
                   onPressed: () => _merge(fit: true, direction: Axis.vertical),
                   child: Text(
                     "vertical & fit",
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   )),
-              RaisedButton(
+              ElevatedButton(
                   onPressed: () => _merge(fit: false, direction: Axis.vertical),
                   child: Text(
                     "vertical",
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   )),
-              RaisedButton(
+              ElevatedButton(
                   onPressed: () =>
                       _merge(fit: true, direction: Axis.horizontal),
                   child: Text(
                     "horizontal & fit",
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   )),
-              RaisedButton(
+              ElevatedButton(
                   onPressed: () =>
                       _merge(fit: false, direction: Axis.horizontal),
                   child: Text(
                     "horizontal",
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   )),
             ],
           ),
@@ -111,9 +112,9 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
   }
 
   ///merge images using ImagesMergeHelper and preview
-  _merge({bool fit, Axis direction}) async {
+  _merge({required bool fit, required Axis direction}) async {
     ui.Image image = await ImagesMergeHelper.margeImages(
-        [assetImage1, assetImage2, providerImage],
+        [assetImage1!, assetImage2!, providerImage!],
         fit: fit, direction: direction, backgroundColor: Colors.black26);
     Uint8List bytes = await ImagesMergeHelper.imageToUint8List(image);
     Navigator.push(

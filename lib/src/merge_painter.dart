@@ -22,8 +22,8 @@ class _MergePainter extends CustomPainter {
     Paint paint = Paint();
     imageList.forEach((image) {
       //scale the image to same width/height
-      double imageHeight;
-      double imageWidth;
+      late double imageHeight;
+      late double imageWidth;
       double dxScale = dx;
       double dyScale = dy;
       if (direction == Axis.vertical) {

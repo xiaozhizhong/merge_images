@@ -1,9 +1,10 @@
 import 'dart:typed_data';
 
-import 'package:example/image_preview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:merge_images/merge_images.dart';
 import 'dart:ui' as ui;
+
+import 'image_preview_page.dart';
 
 ///
 ///@author xiaozhizhong
@@ -16,10 +17,10 @@ class ImagesMergeWidgetPage extends StatefulWidget {
 }
 
 class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
-  var imageList = <ui.Image>[];
-  ui.Image assetImage1;
-  ui.Image assetImage2;
-  ui.Image providerImage;
+  var imageList = <ui.Image?>[];
+  ui.Image? assetImage1;
+  ui.Image? assetImage2;
+  ui.Image? providerImage;
 
   final networkImagePath =
       "http://img.article.pchome.net/00/29/20/31/pic_lib/s960x639/Sakura_28s960x639.jpg";
@@ -90,7 +91,7 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
                 child: Container(
                   width: 100,
                   child: ImagesMerge(
-                    imageList,
+                    imageList as List<ui.Image>,
                     direction: Axis.vertical,
                     fit: true,
                   ),
@@ -105,7 +106,7 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
                 child: Container(
                   width: 100,
                   child: ImagesMerge(
-                    imageList,
+                    imageList as List<ui.Image>,
                     direction: Axis.vertical,
                     backgroundColor: Colors.black26,
                     fit: false,
@@ -121,7 +122,7 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
                 child: Container(
                   height: 70,
                   child: ImagesMerge(
-                    imageList,
+                    imageList as List<ui.Image>,
                     direction: Axis.horizontal,
                     fit: true,
                   ),
@@ -136,7 +137,7 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
                 child: Container(
                   height: 70,
                   child: ImagesMerge(
-                    imageList,
+                    imageList as List<ui.Image>,
                     direction: Axis.horizontal,
                     fit: false,
                     backgroundColor: Colors.black26,
@@ -144,12 +145,10 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
                   ),
                 ),
               ),
-              RaisedButton(
+              ElevatedButton(
                   onPressed: () => getCapture(context),
-                  child: Text(
-                    "Capture",
-                    style: Theme.of(context).textTheme.title,
-                  ))
+                  child: Text("Capture",
+                      style: Theme.of(context).textTheme.headline6))
             ],
           ),
         ),
@@ -159,7 +158,7 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
 
   ///get capture of widget by RepaintBoundary
   getCapture(context) async {
-    Uint8List bytes = await captureController.capture();
+    Uint8List? bytes = await captureController.capture();
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => Preview(bytes)));
   }
