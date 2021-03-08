@@ -24,9 +24,7 @@ class ImagesMergeHelper {
   /// Default to true.
   ///[backgroundColor] background color of picture
   static Future<ui.Image> margeImages(List<ui.Image> imageList,
-      {Axis direction = Axis.vertical,
-      bool fit = true,
-      Color? backgroundColor}) {
+      {Axis direction = Axis.vertical, bool fit = true, Color? backgroundColor}) {
     int maxWidth = 0;
     int maxHeight = 0;
     //calculate max width/height of image
@@ -45,8 +43,7 @@ class ImagesMergeHelper {
     double dx = 0;
     double dy = 0;
     //set background color
-    if (backgroundColor != null)
-      canvas.drawColor(backgroundColor, BlendMode.srcOver);
+    if (backgroundColor != null) canvas.drawColor(backgroundColor, BlendMode.srcOver);
     //draw images into canvas
     imageList.forEach((image) {
       double scaleDx = dx;
@@ -87,19 +84,18 @@ class ImagesMergeHelper {
   ///transfer ui.Image to Unit8List
   ///[image]
   ///[format] default to png
-  static Future<Uint8List> imageToUint8List(ui.Image image,
-      {ui.ImageByteFormat format = ui.ImageByteFormat.png}) async {
-    ByteData byteData =
-        await (image.toByteData(format: format) as FutureOr<ByteData>);
-    return byteData.buffer.asUint8List();
+  static Future<Uint8List?> imageToUint8List(ui.Image image, {ui.ImageByteFormat format = ui.ImageByteFormat.png}) async {
+    ByteData? byteData = await image.toByteData(format: format);
+    return byteData?.buffer.asUint8List();
   }
 
   ///transfer ui.Image to File
   ///[image]
   ///[path] path to store temporary file, will use [ getTemporaryDirectory ]
   ///by path_provider if null
-  static Future<File> imageToFile(ui.Image image, {String? path}) async {
-    Uint8List byte = await imageToUint8List(image);
+  static Future<File?> imageToFile(ui.Image image, {String? path}) async {
+    Uint8List? byte = await imageToUint8List(image);
+    if(byte==null) return null;
     final directory = path ?? (await getTemporaryDirectory()).path;
     String fileName = DateTime.now().toIso8601String();
     String fullPath = '$directory/$fileName.png';

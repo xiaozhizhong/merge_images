@@ -20,7 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   merge_images:
-    path: "../../merge_images"
+    path: ../
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -22,8 +22,7 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
   ui.Image? assetImage2;
   ui.Image? providerImage;
 
-  final networkImagePath =
-      "http://img.article.pchome.net/00/29/20/31/pic_lib/s960x639/Sakura_28s960x639.jpg";
+  final networkImagePath = "http://img.article.pchome.net/00/29/20/31/pic_lib/s960x639/Sakura_28s960x639.jpg";
 
   @override
   void initState() {
@@ -32,12 +31,9 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
   }
 
   loadImage() async {
-    assetImage1 =
-        await ImagesMergeHelper.loadImageFromAsset("assets/sunset.jpeg");
-    assetImage2 =
-        await ImagesMergeHelper.loadImageFromAsset("assets/bridge.jpg");
-    providerImage = await ImagesMergeHelper.loadImageFromProvider(
-        NetworkImage(networkImagePath));
+    assetImage1 = await ImagesMergeHelper.loadImageFromAsset("assets/sunset.jpeg");
+    assetImage2 = await ImagesMergeHelper.loadImageFromAsset("assets/bridge.jpg");
+    providerImage = await ImagesMergeHelper.loadImageFromProvider(NetworkImage(networkImagePath));
   }
 
   @override
@@ -91,15 +87,13 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
                     style: Theme.of(context).textTheme.headline6,
                   )),
               ElevatedButton(
-                  onPressed: () =>
-                      _merge(fit: true, direction: Axis.horizontal),
+                  onPressed: () => _merge(fit: true, direction: Axis.horizontal),
                   child: Text(
                     "horizontal & fit",
                     style: Theme.of(context).textTheme.headline6,
                   )),
               ElevatedButton(
-                  onPressed: () =>
-                      _merge(fit: false, direction: Axis.horizontal),
+                  onPressed: () => _merge(fit: false, direction: Axis.horizontal),
                   child: Text(
                     "horizontal",
                     style: Theme.of(context).textTheme.headline6,
@@ -113,11 +107,10 @@ class _ImagesMergeHelperPageState extends State<ImagesMergeHelperPage> {
 
   ///merge images using ImagesMergeHelper and preview
   _merge({required bool fit, required Axis direction}) async {
-    ui.Image image = await ImagesMergeHelper.margeImages(
-        [assetImage1!, assetImage2!, providerImage!],
+    ui.Image image = await ImagesMergeHelper.margeImages([assetImage1!, assetImage2!, providerImage!],
         fit: fit, direction: direction, backgroundColor: Colors.black26);
-    Uint8List bytes = await ImagesMergeHelper.imageToUint8List(image);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Preview(bytes)));
+    Uint8List? bytes = await ImagesMergeHelper.imageToUint8List(image);
+    if (bytes == null) return;
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Preview(bytes)));
   }
 }

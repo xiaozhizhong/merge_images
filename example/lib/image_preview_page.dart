@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class Preview extends StatelessWidget {
   Preview(this.image);
 
-  final Uint8List? image;
+  final Uint8List image;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class Preview extends StatelessWidget {
       body: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(vertical: 50, horizontal: 30),
-        child: Image.memory(image!),
+        child: Image.memory(image),
       ),
     );
   }
