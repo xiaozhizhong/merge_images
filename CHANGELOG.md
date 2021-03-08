@@ -17,3 +17,6 @@
 ## [1.0.3]
 
 * fix bugs of ImagesMergeHelper
+
+## [2.0.0-nullsafety]
+* migrate to null-safety
