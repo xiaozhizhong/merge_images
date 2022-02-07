@@ -5,6 +5,7 @@ import 'package:merge_images/merge_images.dart';
 import 'dart:ui' as ui;
 
 import 'image_preview_page.dart';
+import 'main.dart';
 
 ///
 ///@author xiaozhizhong
@@ -21,8 +22,6 @@ class _ImagesMergeWidgetPageState extends State<ImagesMergeWidgetPage> {
   late ui.Image assetImage1;
   late ui.Image assetImage2;
   late ui.Image providerImage;
-
-  final networkImagePath = "http://img.article.pchome.net/00/29/20/31/pic_lib/s960x639/Sakura_28s960x639.jpg";
 
   final captureController = CaptureController();
 

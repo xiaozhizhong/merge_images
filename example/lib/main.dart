@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'helper_page.dart';
 import 'widget_page.dart';
 
+const networkImagePath = "https://pic.dbw.cn/003/013/364/00301336495_44db9bad.jpg";
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
